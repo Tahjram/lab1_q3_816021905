@@ -1,0 +1,81 @@
+
+ ets Jan  8 2013,rst cause:2, boot mode:(3,7)
+
+load 0x40100000, len 7040, room 16
+tail 0
+chksum 0xee
+load 0x3ffe8408, len 24, room 8
+tail 0
+chksum 0x67
+load 0x3ffe8420, len 3324, room 8
+tail 4
+chksum 0x47
+csum 0x47
+I (46) boot: ESP-IDF v3.4-49-g0f200b46 2nd stage bootloader
+I (46) boot: compile time 18:24:00
+I (46) qio_mode: Enabling default flash chip QIO
+I (54) boot: SPI Speed      : 40MHz
+I (60) boot: SPI Mode       : QIO
+I (66) boot: SPI Flash Size : 1MB
+I (73) boot: Partition Table:
+I (78) boot: ## Label            Usage          Type ST Offset   Length
+I (89) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (101) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (112) boot:  2 factory          factory app      00 00 00010000 000f0000
+I (124) boot: End of partition table
+I (131) esp_image: segment 0: paddr=0x00010010 vaddr=0x40210010 size=0x170d8 ( 94424) map
+I (176) esp_image: segment 1: paddr=0x000270f0 vaddr=0x402270e8 size=0x05cd0 ( 23760) map
+I (184) esp_image: segment 2: paddr=0x0002cdc8 vaddr=0x3ffe8000 size=0x003dc (   988) load
+I (187) esp_image: segment 3: paddr=0x0002d1ac vaddr=0x40100000 size=0x00080 (   128) load
+I (201) esp_image: segment 4: paddr=0x0002d234 vaddr=0x40100080 size=0x04558 ( 17752) load
+I (220) boot: Loaded app from partition at offset 0x10000
+I (334) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0
+I (336) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0
+I (347) main: Configuration Bits: 17026
+
+I (355) main: ADS1115 Configured
+
+I (362) main: Read Successful
+
+I (367) main: Voltage = 0.58 V
+
+I (2365) main: Read Successful
+
+I (2366) main: Voltage = 0.58 V
+
+I (4365) main: Read Successful
+
+I (4366) main: Voltage = 0.58 V
+
+I (6365) main: Read Successful
+
+I (6366) main: Voltage = 0.58 V
+
+I (8365) main: Read Successful
+
+I (8366) main: Voltage = 0.58 V
+
+I (10366) main: Read Successful
+
+I (10367) main: Voltage = 0.58 V
+
+I (12366) main: Read Successful
+
+I (12367) main: Voltage = 0.58 V
+
+I (14366) main: Read Successful
+
+I (14367) main: Voltage = 3.1 V
+
+I (16366) main: Read Successful
+
+I (16367) main: Voltage = 3.1 V
+
+I (18366) main: Read Successful
+
+I (18367) main: Voltage = 3.1 V
+
+I (20367) main: Read Successful
+
+I (20368) main: Voltage = 3.1 V
+
