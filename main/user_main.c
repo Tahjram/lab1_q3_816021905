@@ -119,21 +119,21 @@ static esp_err_t i2c_master_ads1115_read(i2c_port_t i2c_num, uint8_t reg_address
 static esp_err_t data_write(i2c_port_t i2c_num, uint8_t reg_address, uint16_t data)
 {
     int ret;
-    uint8_t buf[2];
-    buf[0] = (data >> 8) & 0xFF;
-    buf[1] = (data >> 0) & 0xFF;
+    uint8_t bytes[2];
+    bytes[0] = (data >> 8) & 0xFF;
+    bytes[1] = (data >> 0) & 0xFF;
 
-    ret = i2c_master_ads1115_write(i2c_num, reg_address, buf, 2);
+    ret = i2c_master_ads1115_write(i2c_num, reg_address, bytes, 2);
     return ret;
 }
 
 static esp_err_t data_read(i2c_port_t i2c_num, uint8_t reg_address, uint16_t *data)
 {
     int ret;
-    uint8_t buf[2];
+    uint8_t bytes[2];
 
-    ret = i2c_master_ads1115_read(i2c_num, reg_address, buf, 2);
-    *data = (buf[0] << 8) | buf[1];
+    ret = i2c_master_ads1115_read(i2c_num, reg_address, bytes, 2);
+    *data = (bytes[0] << 8) | bytes[1];
     return ret;
 }
 
@@ -165,7 +165,7 @@ static esp_err_t i2c_master_ads1115_init(i2c_port_t i2c_num)
     conf.CONF = data;
 
     // Output Configuration Bits
-    ESP_LOGI(TAG, "Configuration Bits: %d\n", (int)conf.CONF);
+    ESP_LOGI(TAG, "Configuration Bits: %d\n", conf.CONF);
 
     // Writing to CONFIG Register
     ESP_ERROR_CHECK(data_write(i2c_num, ADS1115_CONF, conf.CONF));
@@ -180,10 +180,7 @@ static void i2c_task(void *arg)
     esp_err_t check;
 
     
-    check = i2c_master_ads1115_init(I2C_MASTER_NUM);
-    if(check == ESP_OK){
-        ESP_LOGI(TAG,"ADS1115 Configured\n");
-    }
+    i2c_master_ads1115_init(I2C_MASTER_NUM);
     
     while(1)
     {

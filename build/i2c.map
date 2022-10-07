@@ -19204,6 +19204,8 @@ END GROUP
  .bss.s_cpu_speed_up_nest
                 0x00000000401045d8        0x2 /home/tahjram/esp/ESP8266_RTOS_SDK/components/esp8266/lib/libcore.a(user_interface.o)
  *libfreertos.a:queue.*(.bss .bss.* COMMON)
+ *libfreertos.a:list.*(.bss .bss.* COMMON)
+ *libfreertos.a:impure.*(.bss .bss.* COMMON)
  *libfreertos.a:tasks.*(.bss .bss.* COMMON)
  *fill*         0x00000000401045da        0x2 
  .bss.uxSchedulerSuspended
@@ -19249,6 +19251,7 @@ END GROUP
  .bss.pxCurrentTCB
                 0x00000000401047a4        0x4 /home/tahjram/esp/i2c/build/freertos/libfreertos.a(tasks.o)
                 0x00000000401047a4                pxCurrentTCB
+ *libfreertos.a:stream_buffer.*(.bss .bss.* COMMON)
  *libfreertos.a:freertos_hooks.*(.bss .bss.* COMMON)
  *libfreertos.a:event_groups.*(.bss .bss.* COMMON)
  *libfreertos.a:timers.*(.bss .bss.* COMMON)
@@ -19266,9 +19269,6 @@ END GROUP
                 0x00000000401047bc       0x14 /home/tahjram/esp/i2c/build/freertos/libfreertos.a(timers.o)
  .bss.xActiveTimerList1
                 0x00000000401047d0       0x14 /home/tahjram/esp/i2c/build/freertos/libfreertos.a(timers.o)
- *libfreertos.a:list.*(.bss .bss.* COMMON)
- *libfreertos.a:impure.*(.bss .bss.* COMMON)
- *libfreertos.a:stream_buffer.*(.bss .bss.* COMMON)
  *liblwip.a:(.bss .bss.* COMMON)
                 0x00000000401047e4                . = ALIGN (0x4)
                 0x00000000401047e4                _iram_bss_end = ABSOLUTE (.)
@@ -19366,7 +19366,7 @@ END GROUP
 .dram0.bss      0x000000003ffe83e0      0xf60
                 0x000000003ffe83e0                . = ALIGN (0x8)
                 0x000000003ffe83e0                _bss_start = ABSOLUTE (.)
- *(EXCLUDE_FILE(*liblwip.a *libfreertos.a:queue.* *libfreertos.a:tasks.* *libfreertos.a:freertos_hooks.* *libfreertos.a:event_groups.* *libfreertos.a:timers.* *libfreertos.a:list.* *libfreertos.a:impure.* *libfreertos.a:stream_buffer.* *libcore.a) .bss EXCLUDE_FILE(*liblwip.a *libfreertos.a:queue.* *libfreertos.a:tasks.* *libfreertos.a:freertos_hooks.* *libfreertos.a:event_groups.* *libfreertos.a:timers.* *libfreertos.a:list.* *libfreertos.a:impure.* *libfreertos.a:stream_buffer.* *libcore.a) .bss.* EXCLUDE_FILE(*liblwip.a *libfreertos.a:queue.* *libfreertos.a:tasks.* *libfreertos.a:freertos_hooks.* *libfreertos.a:event_groups.* *libfreertos.a:timers.* *libfreertos.a:list.* *libfreertos.a:impure.* *libfreertos.a:stream_buffer.* *libcore.a) COMMON)
+ *(EXCLUDE_FILE(*liblwip.a *libfreertos.a:queue.* *libfreertos.a:list.* *libfreertos.a:impure.* *libfreertos.a:tasks.* *libfreertos.a:stream_buffer.* *libfreertos.a:freertos_hooks.* *libfreertos.a:event_groups.* *libfreertos.a:timers.* *libcore.a) .bss EXCLUDE_FILE(*liblwip.a *libfreertos.a:queue.* *libfreertos.a:list.* *libfreertos.a:impure.* *libfreertos.a:tasks.* *libfreertos.a:stream_buffer.* *libfreertos.a:freertos_hooks.* *libfreertos.a:event_groups.* *libfreertos.a:timers.* *libcore.a) .bss.* EXCLUDE_FILE(*liblwip.a *libfreertos.a:queue.* *libfreertos.a:list.* *libfreertos.a:impure.* *libfreertos.a:tasks.* *libfreertos.a:stream_buffer.* *libfreertos.a:freertos_hooks.* *libfreertos.a:event_groups.* *libfreertos.a:timers.* *libcore.a) COMMON)
  .bss.s_nmi_wd_state
                 0x000000003ffe83e0        0x4 /home/tahjram/esp/i2c/build/esp8266/libesp8266.a(task_wdt.o)
  .bss.s_reset_reason
