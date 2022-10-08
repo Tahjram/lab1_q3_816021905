@@ -23,55 +23,79 @@ I (86) boot:  0 nvs              WiFi data        01 02 00009000 00006000
 I (98) boot:  1 phy_init         RF data          01 01 0000f000 00001000
 I (109) boot:  2 factory          factory app      00 00 00010000 000f0000
 I (121) boot: End of partition table
-I (127) esp_image: segment 0: paddr=0x00010010 vaddr=0x40210010 size=0x170b0 ( 94384) map
-I (172) esp_image: segment 1: paddr=0x000270c8 vaddr=0x402270c0 size=0x05c9c ( 23708) map
-I (181) esp_image: segment 2: paddr=0x0002cd6c vaddr=0x3ffe8000 size=0x003dc (   988) load
-I (184) esp_image: segment 3: paddr=0x0002d150 vaddr=0x40100000 size=0x00080 (   128) load
-I (197) esp_image: segment 4: paddr=0x0002d1d8 vaddr=0x40100080 size=0x04558 ( 17752) load
+I (127) esp_image: segment 0: paddr=0x00010010 vaddr=0x40210010 size=0x17078 ( 94328) map
+I (172) esp_image: segment 1: paddr=0x00027090 vaddr=0x40227088 size=0x05cb8 ( 23736) map
+I (181) esp_image: segment 2: paddr=0x0002cd50 vaddr=0x3ffe8000 size=0x003dc (   988) load
+I (183) esp_image: segment 3: paddr=0x0002d134 vaddr=0x40100000 size=0x00080 (   128) load
+I (197) esp_image: segment 4: paddr=0x0002d1bc vaddr=0x40100080 size=0x04558 ( 17752) load
 I (216) boot: Loaded app from partition at offset 0x10000
 I (330) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0
 I (332) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0
-I (345) main: Read Successful
+I (344) main: Read Successfully Performed
 
-I (349) main: Voltage = 3.0 V
+I (351) main: Voltage = 2.96 V
 
-I (2350) main: Read Successful
+I (2350) main: Read Successfully Performed
 
-I (2351) main: Voltage = 3.1 V
+I (2351) main: Voltage = 2.97 V
 
-I (4350) main: Read Successful
+I (4350) main: Read Successfully Performed
 
-I (4351) main: Voltage = 3.1 V
+I (4351) main: Voltage = 2.97 V
 
-I (6350) main: Read Successful
+I (6350) main: Read Successfully Performed
 
-I (6351) main: Voltage = 3.1 V
+I (6351) main: Voltage = 2.97 V
 
-I (8350) main: Read Successful
+I (8350) main: Read Successfully Performed
 
-I (8351) main: Voltage = 3.1 V
+I (8351) main: Voltage = 2.97 V
 
-I (10351) main: Read Successful
+I (10351) main: Read Successfully Performed
 
-I (10352) main: Voltage = 0.59 V
+I (10352) main: Voltage = 2.97 V
 
-I (12351) main: Read Successful
+I (12351) main: Read Successfully Performed
 
-I (12352) main: Voltage = 0.59 V
+I (12352) main: Voltage = 2.97 V
 
-I (14351) main: Read Successful
+I (14351) main: Read Successfully Performed
 
-I (14352) main: Voltage = 0.59 V
+I (14352) main: Voltage = 2.97 V
 
-I (16351) main: Read Successful
+I (16351) main: Read Successfully Performed
 
-I (16352) main: Voltage = 0.59 V
+I (16352) main: Voltage = 2.97 V
 
-I (18351) main: Read Successful
+I (18351) main: Read Successfully Performed
 
-I (18352) main: Voltage = 0.59 V
+I (18352) main: Voltage = 2.97 V
 
-I (20352) main: Read Successful
+I (20352) main: Read Successfully Performed
 
 I (20353) main: Voltage = 0.59 V
+
+I (22352) main: Read Successfully Performed
+
+I (22353) main: Voltage = 0.59 V
+
+I (24352) main: Read Successfully Performed
+
+I (24353) main: Voltage = 0.59 V
+
+I (26352) main: Read Successfully Performed
+
+I (26353) main: Voltage = 0.59 V
+
+I (28352) main: Read Successfully Performed
+
+I (28353) main: Voltage = 0.59 V
+
+I (30353) main: Read Successfully Performed
+
+I (30354) main: Voltage = 2.97 V
+
+I (32353) main: Read Successfully Performed
+
+I (32354) main: Voltage = 2.97 V
 

@@ -42,6 +42,7 @@ static const char *TAG = "main";
 #define NACK_VAL                            0x1              /*!< I2C nack value */
 #define LAST_NACK_VAL                       0x2              /*!< I2C last_nack value */
 
+//Configuration Bits
 #define OS                                  0x00            // NULL
 #define MUX                                 0x04            // AINp = AIN0 and AINn = GND
 #define PGA                                 0x01            // FS = 4.096 V
@@ -111,45 +112,24 @@ static esp_err_t i2c_master_ads1115_read(i2c_port_t i2c_num, uint8_t reg_address
     return ret;
 }
 
-static esp_err_t data_write(i2c_port_t i2c_num, uint8_t reg_address, uint16_t data)
-{
-    int ret;
-    uint8_t bytes[2];
-    bytes[0] = (data >> 8) & 0xFF;
-    bytes[1] = (data >> 0) & 0xFF;
-
-    ret = i2c_master_ads1115_write(i2c_num, reg_address, bytes, 2);
-    return ret;
-}
-
-static esp_err_t data_read(i2c_port_t i2c_num, uint8_t reg_address, uint16_t *data)
-{
-    int ret;
-    uint8_t bytes[2];
-
-    ret = i2c_master_ads1115_read(i2c_num, reg_address, bytes, 2);
-    *data = (bytes[0] << 8) | bytes[1];
-    return ret;
-}
-
+//ADS1115 configuration
 static esp_err_t i2c_master_ads1115_init(i2c_port_t i2c_num)
 {
     vTaskDelay(100 / portTICK_RATE_MS);
     i2c_master_init();
 
-    uint16_t conf;
-    conf = (OS << 3) | MUX;
-    conf = (conf << 3) | PGA;
-    conf = (conf << 1) | MODE;
-    conf = (conf << 3) | DR;
-    conf = (conf << 1) | COMP_MODE;
-    conf = (conf << 1) | COMP_POL;
-    conf = (conf << 1) | COMP_LAT;
-    conf = (conf << 2) | COMP_QUE;
+    uint8_t conf[2];
+    conf[0] = (OS << 3) | MUX;
+    conf[0] = (conf[0] << 3) | PGA;
+    conf[0] = (conf[0] << 1) | MODE;
+    conf[1] = (DR << 1) | COMP_MODE;
+    conf[1] = (conf[1] << 1) | COMP_POL;
+    conf[1] = (conf[1] << 1) | COMP_LAT;
+    conf[1] = (conf[1] << 2) | COMP_QUE;
     
 
-    // Writing to CONFIG Register
-    ESP_ERROR_CHECK(data_write(i2c_num, ADS1115_CONF, conf));
+    // Writing to CONF Register
+    ESP_ERROR_CHECK(i2c_master_ads1115_write(i2c_num, ADS1115_CONF, conf,2));
 
     return ESP_OK;
 }
@@ -159,16 +139,17 @@ static void i2c_task(void *arg)
     uint16_t data;
     double voltage;
     esp_err_t check;
-
+    uint8_t read[2];
     
     i2c_master_ads1115_init(I2C_MASTER_NUM);
     
     while(1)
     {
-        check = data_read(I2C_MASTER_NUM,ADS1115_CONV,&data);
+        check = i2c_master_ads1115_read(I2C_MASTER_NUM,ADS1115_CONV,read,2);    //Read from ADS1115
         if(check == ESP_OK)
         {
-            ESP_LOGI(TAG,"Read Successful\n");
+            ESP_LOGI(TAG,"Read Successfully Performed\n");
+            data = (read[0] << 8) | read[1];                                    //Conversion from 2 bytes to voltage reading
             voltage = (double)data * 1.25e-4;
             ESP_LOGI(TAG,"Voltage = %d.%d V\n",(uint16_t)voltage,(uint16_t)(voltage*100)%100);
             vTaskDelay(2000/portTICK_PERIOD_MS);
