@@ -17,11 +17,11 @@ static const char *TAG = "main";
 
 
 
-#define I2C_MASTER_SCL_IO                   2                /*!< gpio number for I2C master clock */
+#define I2C_MASTER_SCL_IO                   2               /*!< gpio number for I2C master clock */
 #define I2C_MASTER_SDA_IO                   0               /*!< gpio number for I2C master data  */
-#define I2C_MASTER_NUM                      I2C_NUM_0        /*!< I2C port number for master dev */
-#define I2C_MASTER_TX_BUF_DISABLE           0                /*!< I2C master do not need buffer */
-#define I2C_MASTER_RX_BUF_DISABLE           0                /*!< I2C master do not need buffer */
+#define I2C_MASTER_NUM                      I2C_NUM_0       /*!< I2C port number for master dev */
+#define I2C_MASTER_TX_BUF_DISABLE           0               /*!< I2C master do not need buffer */
+#define I2C_MASTER_RX_BUF_DISABLE           0               /*!< I2C master do not need buffer */
 
 //ADS1115 Addresses
 #define ADS1115_CONV                        0x0             //Conversion Register
@@ -42,20 +42,15 @@ static const char *TAG = "main";
 #define NACK_VAL                            0x1              /*!< I2C nack value */
 #define LAST_NACK_VAL                       0x2              /*!< I2C last_nack value */
 
-// Struct for Config Register
-typedef struct CONFIG
-{
-    uint8_t OS;                                             //Operational Staus 15
-    uint8_t MUX;                                            //Mux Configuration 14:12
-    uint8_t PGA;                                            //Gain Amplifier Configuration 11:9
-    uint8_t MODE;                                           //Operating Mode 8
-    uint8_t DR;                                             //Data rate 7:5
-    uint8_t COMP_MODE;                                      //Comparator Mode 4
-    uint8_t COMP_POL;                                       //Comparator Polarity 3
-    uint8_t COMP_LAT;                                       //Latching Comparator 2
-    uint8_t COMP_QUE;                                       //Comparator Queue 1:0
-    uint16_t CONF;                                          //16-bit Configuration Line
-}ADS1115_CONF_REG;
+#define OS                                  0x00            // NULL
+#define MUX                                 0x04            // AINp = AIN0 and AINn = GND
+#define PGA                                 0x01            // FS = 4.096 V
+#define MODE                                0x00            // Continuous-Conversion Mode
+#define DR                                  0x04            // 128SPS
+#define COMP_MODE                           0x00            // Traditional Comparator
+#define COMP_POL                            0x00            // Active Low
+#define COMP_LAT                            0x00            // Non-latching Comparator
+#define COMP_QUE                            0x02            // Assert After Four Conversions
 
 
 static esp_err_t i2c_master_init()
@@ -142,33 +137,19 @@ static esp_err_t i2c_master_ads1115_init(i2c_port_t i2c_num)
     vTaskDelay(100 / portTICK_RATE_MS);
     i2c_master_init();
 
-    ADS1115_CONF_REG conf;
-    conf.OS = 0x00;        // NULL
-    conf.MUX = 0x04;       // AINp = AIN0 and AINn = GND
-    conf.PGA = 0x01;       // FS = 4.096 V
-    conf.MODE = 0x00;      // Continuous-Conversion Mode
-    conf.DR = 0x04;        // 128SPS
-    conf.COMP_MODE = 0x00; // Traditional Comparator
-    conf.COMP_POL = 0x00;  // Active Low
-    conf.COMP_LAT = 0x00;  // Non-latching Comparator
-    conf.COMP_QUE = 0x02;  // Assert After Four Conversions
-
-    uint16_t data;
-    data = (conf.OS << 3) | conf.MUX;
-    data = (data << 3) | conf.PGA;
-    data = (data << 1) | conf.MODE;
-    data = (data << 3) | conf.DR;
-    data = (data << 1) | conf.COMP_MODE;
-    data = (data << 1) | conf.COMP_POL;
-    data = (data << 1) | conf.COMP_LAT;
-    data = (data << 2) | conf.COMP_QUE;
-    conf.CONF = data;
-
-    // Output Configuration Bits
-    ESP_LOGI(TAG, "Configuration Bits: %d\n", conf.CONF);
+    uint16_t conf;
+    conf = (OS << 3) | MUX;
+    conf = (conf << 3) | PGA;
+    conf = (conf << 1) | MODE;
+    conf = (conf << 3) | DR;
+    conf = (conf << 1) | COMP_MODE;
+    conf = (conf << 1) | COMP_POL;
+    conf = (conf << 1) | COMP_LAT;
+    conf = (conf << 2) | COMP_QUE;
+    
 
     // Writing to CONFIG Register
-    ESP_ERROR_CHECK(data_write(i2c_num, ADS1115_CONF, conf.CONF));
+    ESP_ERROR_CHECK(data_write(i2c_num, ADS1115_CONF, conf));
 
     return ESP_OK;
 }
